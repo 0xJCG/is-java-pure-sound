@@ -7,11 +7,9 @@ public class ListaArtistasTotal {
 	private ListaArtistasTotal() {
 		this.lista = new ListaArtistas();
 	}
+	
 	public static ListaArtistasTotal getListaArtistasTotal() {
 		return mListaArtistasTotal;
-	}
-	public ListaArtistas getlArtistas() {
-		return lista;
 	}
 	
 	private ListaArtistas getLista() {
