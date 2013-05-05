@@ -1,16 +1,17 @@
-package Interface;
+package graphicinterface;
 
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 
-public class lista extends JPanel implements Observer {
+@SuppressWarnings("serial")
+public class Lista extends JPanel implements Observer {
 
 	/**
 	 * Create the panel.
 	 */
-	public lista() {
+	public Lista() {
 		
 		JLabel lblNombre = new JLabel("New label");
 		add(lblNombre);
