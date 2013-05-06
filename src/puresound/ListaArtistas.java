@@ -3,6 +3,8 @@ package puresound;
 import java.util.Iterator;
 import java.util.TreeSet;
 
+import net.sf.jga.algorithms.Filter;
+
 public class ListaArtistas {
 	private TreeSet<Artista> lista;
 	
@@ -53,10 +55,10 @@ public class ListaArtistas {
 	}
 	
 	public Iterable<Artista> filtrarPorDiscografica(Discografica pDiscografica) {
-		return null;
+		return Filter.filter(this.getLista(), new FiltrarPorDiscografica(pDiscografica));
 	}
 	
 	public Iterable<Artista> filtrarPorNombre(String pNombre) {
-		return null;
+		return Filter.filter(this.getLista(), new FiltrarPorNombre(pNombre));
 	}
 }
