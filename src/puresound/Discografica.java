@@ -1,6 +1,6 @@
 package puresound;
 
-public class Discografica {
+public class Discografica implements Comparable<String> {
 	private String nombre;
 	private int anio;
 	
@@ -15,5 +15,9 @@ public class Discografica {
 
 	public int getAnio() {
 		return this.anio;
+	}
+	
+	public int compareTo(String pNombre) {
+		return (this.getNombre().compareTo(pNombre));
 	}
 }
