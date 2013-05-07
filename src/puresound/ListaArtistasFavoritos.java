@@ -1,6 +1,8 @@
 package puresound;
 
-public class ListaArtistasFavoritos {
+import java.util.Observable;
+
+public class ListaArtistasFavoritos extends Observable {
 	private static ListaArtistasFavoritos miListaArtistasFavoritos = new ListaArtistasFavoritos();
 	private ListaArtistas lista;
 
