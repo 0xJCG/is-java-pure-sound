@@ -3,7 +3,7 @@ package puresound;
 import net.sf.jga.fn.UnaryFunctor;
 
 @SuppressWarnings("serial")
-public class FiltrarPorDiscografica extends UnaryFunctor<Artista, Boolean>{
+public class FiltrarPorDiscografica extends UnaryFunctor<Artista, Boolean> {
 	private Discografica discografica;
 	
 	public FiltrarPorDiscografica(Discografica pDiscografica) {

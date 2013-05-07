@@ -3,6 +3,8 @@ package puresound;
 import java.util.Iterator;
 import java.util.TreeSet;
 
+import net.sf.jga.algorithms.Filter;
+
 public class ListaDiscos {
 	private TreeSet<Disco> lista;
 
@@ -46,6 +48,6 @@ public class ListaDiscos {
 	}
 	
 	public Iterable<Disco> filtrarPorFormato(Formato pFormato) {
-		return null;
+		return Filter.filter(this.getLista(), new FiltrarPorFormato(pFormato));
 	}
 }
