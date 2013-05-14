@@ -17,14 +17,18 @@ public class ListaCanciones {
 	}
 	
 	public void addCancion(Cancion pCancion) {
-		if (!this.getLista().contains(pCancion))
-			this.getLista().add(pCancion);
+		this.getLista().add(pCancion);
 	}
 	
-	public void removeCancion(String pNombre) {
+	public boolean removeCancion(String pNombre) {
 		Cancion cancion = this.buscarCancion(pNombre);
 		if (cancion != null)
-			this.getLista().remove(cancion);
+			return this.remove(cancion);
+		return false;
+	}
+	
+	public boolean remove(Cancion pCancion) {
+		return this.getLista().remove(pCancion);
 	}
 	
 	public Cancion buscarCancion(String pNombre) {

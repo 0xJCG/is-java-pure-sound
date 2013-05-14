@@ -20,8 +20,12 @@ public class ListaArtistasTotal {
 		this.getLista().addArtista(pArtista);
 	}
 	
-	public void removeArtista(String pNombre) {
-		this.getLista().removeArtista(pNombre);
+	public boolean removeArtista(String pNombre) {
+		return this.getLista().removeArtista(pNombre);
+	}
+	
+	public boolean remove(Artista pArtista) {
+		return this.getLista().remove(pArtista);
 	}
 	
 	public Artista buscarArtista(String pNombre) {

@@ -20,8 +20,12 @@ public class ListaCancionesFavoritas {
 		this.getLista().addCancion(pCancion);
 	}
 	
-	public void removeCancion(String pNombre) {
-		this.getLista().removeCancion(pNombre);
+	public boolean removeCancion(String pNombre) {
+		return this.getLista().removeCancion(pNombre);
+	}
+	
+	public boolean remove(Cancion pCancion) {
+		return this.getLista().remove(pCancion);
 	}
 	
 	public Cancion buscarCancion(String pNombre) {

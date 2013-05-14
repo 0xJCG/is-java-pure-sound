@@ -18,7 +18,11 @@ public abstract class Festival extends Evento {
 		this.getListaArtistas().addArtista(pArtista);
 	}
 	
-	public void removeArtista(String pNombre) {
-		this.getListaArtistas().removeArtista(pNombre);
+	public boolean removeArtista(String pNombre) {
+		return this.getListaArtistas().removeArtista(pNombre);
+	}
+	
+	public boolean remove(Artista pArtista) {
+		return this.getListaArtistas().remove(pArtista);
 	}
 }

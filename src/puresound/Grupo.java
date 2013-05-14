@@ -17,8 +17,12 @@ public class Grupo extends Artista {
 		this.getIntegrantes().addMusico(pMusico);
 	}
 	
-	public void removeIntegrante(String pMusico){
-		this.getIntegrantes().removeMusico(pMusico);
+	public boolean removeIntegrante(String pNombre){
+		return this.getIntegrantes().removeMusico(pNombre);
+	}
+	
+	public boolean removeIntegrante(Musico pMusico){
+		return this.getIntegrantes().remove(pMusico);
 	}
 	
 	public void reemplazarIntegrante(String pNombre, Musico pMusico){

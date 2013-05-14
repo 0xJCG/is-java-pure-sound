@@ -24,14 +24,18 @@ public class ListaEventos {
 	}
 	
 	public void addEvento(Evento pEvento) {
-		if (this.getLista().contains(pEvento))
-			this.getLista().add(pEvento);
+		this.getLista().add(pEvento);
 	}
 	
-	public void removeEvento(String pNombre) {
+	public boolean removeEvento(String pNombre) {
 		Evento evento = this.buscarEvento(pNombre);
 		if (evento != null)
-			this.getLista().remove(evento);
+			return this.remove(evento);
+		return false;
+	}
+	
+	public boolean remove(Evento pEvento) {
+		return this.getLista().remove(pEvento);
 	}
 	
 	private Evento buscarEvento(String pNombre) {

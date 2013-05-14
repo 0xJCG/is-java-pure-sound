@@ -21,14 +21,18 @@ public class ListaArtistas {
 	}
 	
 	public void addArtista(Artista pArtista) {
-		if (this.getLista().contains(pArtista))
-			this.getLista().add(pArtista);
+		this.getLista().add(pArtista);
 	}
 	
-	public void removeArtista(String pNombre) {
+	public boolean removeArtista(String pNombre) {
 		Artista artista = this.buscarArtista(pNombre);
 		if (artista != null)
-			this.getLista().remove(artista);
+			return this.remove(artista);
+		return false;
+	}
+	
+	public boolean remove(Artista pArtista) {
+		return this.getLista().remove(pArtista);
 	}
 	
 	public Artista buscarArtista(String pNombre) {

@@ -21,14 +21,18 @@ public class ListaDiscos {
 	}
 	
 	public void addDisco(Disco pDisco) {
-		if (!this.getLista().contains(pDisco))
-			this.getLista().add(pDisco);
+		this.getLista().add(pDisco);
 	}
 	
-	public void removeDisco(String pNombre) {
+	public boolean removeDisco(String pNombre) {
 		Disco disco = this.buscarDisco(pNombre);
 		if (disco != null)
-			this.getLista().remove(disco);
+			return this.remove(disco);
+		return false;
+	}
+	
+	public boolean remove(Disco pDisco) {
+		return this.getLista().remove(pDisco);
 	}
 	
 	public Disco buscarDisco(String pNombre) {

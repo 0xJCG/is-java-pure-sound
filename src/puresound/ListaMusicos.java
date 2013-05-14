@@ -14,22 +14,23 @@ public class ListaMusicos {
 		return this.lista;
 	}
 	
-	private Iterator<Musico> getIterator(){
+	private Iterator<Musico> getIterator() {
 		return this.getLista().iterator();
 	}
 	
-	public void addMusico(Musico pMusico){
-		if (!this.getLista().contains(pMusico))
-			this.getLista().add(pMusico);
+	public void addMusico(Musico pMusico) {
+		this.getLista().add(pMusico);
 	}
 	
-	public boolean removeMusico(String pNombre){
+	public boolean removeMusico(String pNombre) {
 		Musico musico = this.buscarMusico(pNombre);
-		if (musico != null) {
-			this.getLista().remove(musico);
-			return true;
-		}
+		if (musico != null)
+			return this.remove(musico);
 		return false;
+	}
+	
+	public boolean remove(Musico pMusico) {
+		return this.getLista().remove(pMusico);
 	}
 	
 	private Musico buscarMusico(String pNombre) {
