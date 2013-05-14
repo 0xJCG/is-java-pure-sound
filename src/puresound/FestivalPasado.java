@@ -1,13 +1,13 @@
 package puresound;
 
-import java.util.Date;
+import java.util.Calendar;
 
 public class FestivalPasado extends Festival implements Pasado {
 	private Puntuacion puntuacion;
 	private String resumen;
 	private int asistenciaFinal;
 	
-	public FestivalPasado(String pNombre, Date pFecha, String pLugar, String pResumen, int pAsistenciaFinal) {
+	public FestivalPasado(String pNombre, Calendar pFecha, String pLugar, String pResumen, int pAsistenciaFinal) {
 		super(pNombre, pFecha, pLugar);
 		this.resumen = pResumen;
 		this.asistenciaFinal = pAsistenciaFinal;

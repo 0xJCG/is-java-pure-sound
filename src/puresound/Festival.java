@@ -1,11 +1,11 @@
 package puresound;
 
-import java.util.Date;
+import java.util.Calendar;
 
 public abstract class Festival extends Evento {
 	private ListaArtistas listaArtistas;
 	
-	public Festival(String pNombre, Date pFecha, String pLugar) {
+	public Festival(String pNombre, Calendar pFecha, String pLugar) {
 		super(pNombre, pFecha, pLugar);
 		this.listaArtistas = new ListaArtistas();
 	}

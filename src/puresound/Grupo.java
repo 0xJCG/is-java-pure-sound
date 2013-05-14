@@ -1,10 +1,10 @@
 package puresound;
 
-import java.util.Date;
+import java.util.Calendar;
 
 public class Grupo extends Artista {
 	private ListaMusicos integrantes;
-	public Grupo(String pNombre, Date pFechaFormacion, Discografica pDiscografica) {
+	public Grupo(String pNombre, Calendar pFechaFormacion, Discografica pDiscografica) {
 		super(pNombre, pFechaFormacion, pDiscografica);
 		this.integrantes = new ListaMusicos();
 	}

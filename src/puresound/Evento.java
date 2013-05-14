@@ -1,13 +1,13 @@
 package puresound;
 
-import java.util.Date;
+import java.util.Calendar;
 
 public abstract class Evento implements Comparable<String> {
 	private String nombre;
-	private Date fecha;
+	private Calendar fecha;
 	private String lugar;
 	
-	public Evento(String pNombre, Date pFecha, String pLugar) {
+	public Evento(String pNombre, Calendar pFecha, String pLugar) {
 		this.nombre = pNombre;
 		this.fecha = pFecha;
 		this.lugar = pLugar;
@@ -17,7 +17,7 @@ public abstract class Evento implements Comparable<String> {
 		return this.nombre;
 	}
 
-	public Date getFecha() {
+	public Calendar getFecha() {
 		return this.fecha;
 	}
 

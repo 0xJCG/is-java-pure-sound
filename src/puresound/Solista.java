@@ -1,11 +1,11 @@
 package puresound;
 
-import java.util.Date;
+import java.util.Calendar;
 
 public class Solista extends Artista {
 	private Musico integrante;
 	
-	public Solista(String pNombre, Date pFechaFormacion, Musico pIntegrante, Discografica pDiscografica) {
+	public Solista(String pNombre, Calendar pFechaFormacion, Musico pIntegrante, Discografica pDiscografica) {
 		super(pNombre, pFechaFormacion, pDiscografica);
 		this.integrante = pIntegrante;
 	}

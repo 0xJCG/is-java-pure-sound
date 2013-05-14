@@ -1,15 +1,15 @@
 package puresound;
 
-import java.util.Date;
+import java.util.Calendar;
 
 public abstract class Artista implements Comparable<String> {
 	private String nombre;
-	private Date fechaFormacion;
+	private Calendar fechaFormacion;
 	private boolean enActivo;
 	private Discografica discografica;
 	private ListaDiscos discografia;
 	
-	public Artista(String pNombre, Date pFechaFormacion, Discografica pDiscografica) {
+	public Artista(String pNombre, Calendar pFechaFormacion, Discografica pDiscografica) {
 		this.nombre = pNombre;
 		this.fechaFormacion = pFechaFormacion;
 		this.enActivo = true;
@@ -33,7 +33,7 @@ public abstract class Artista implements Comparable<String> {
 		return this.nombre;
 	}
 	
-	public Date getFechaFormacion() {
+	public Calendar getFechaFormacion() {
 		return this.fechaFormacion;
 	}
 	
