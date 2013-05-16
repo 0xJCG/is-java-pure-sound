@@ -12,6 +12,10 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import puresound.ListaArtistasFavoritos;
+import puresound.ListaArtistasTotal;
+import puresound.ListaEventos;
+
 @SuppressWarnings("serial")
 public class Main extends JFrame {
 
@@ -104,20 +108,23 @@ public class Main extends JFrame {
 	}
 	
 	private class MenuArtistasActionListener implements ActionListener {
+		ListaArtistasTotal model = ListaArtistasTotal.getListaArtistasTotal();
 		public void actionPerformed(ActionEvent e) {
-			cambiarPanel(new Artistas());
+			cambiarPanel(new Artistas(model));
 		}
 	}
 	
 	private class MenuEventosActionListener implements ActionListener {
+		ListaEventos model = ListaEventos.getListaEventos();
 		public void actionPerformed(ActionEvent e) {
-			cambiarPanel(new Eventos());
+			cambiarPanel(new Eventos(model));
 		}
 	}
 	
 	private class MenuUsuarioActionListener implements ActionListener {
+		ListaArtistasFavoritos model = ListaArtistasFavoritos.getListaArtistasFavoritos();
 		public void actionPerformed(ActionEvent e) {
-			cambiarPanel(new User());
+			cambiarPanel(new User(model));
 		}
 	}
 

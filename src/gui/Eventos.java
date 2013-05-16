@@ -5,6 +5,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 
 import puresound.Evento;
+import puresound.ListaEventos;
 
 @SuppressWarnings("serial")
 public class Eventos extends JPanel {
@@ -12,7 +13,7 @@ public class Eventos extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public Eventos() {
+	public Eventos(ListaEventos model) {
 		
 		JLabel lblEventos = new JLabel("Eventos");
 		add(lblEventos);

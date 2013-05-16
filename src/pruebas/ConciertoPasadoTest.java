@@ -59,7 +59,8 @@ public class ConciertoPasadoTest {
 		assertNull(cp1.getPuntuacion());
 	}
 	@Test
-	public void testCompareTo(){
-		assertEquals(cp1.compareTo("QW"),0);
+	public void testCompareTo() {
+		ConciertoPasado cp2 = new ConciertoPasado("QW",fecha,"Aqui",g1,"afasdg",245);
+		assertEquals(cp1.compareTo(cp2),0);
 	}
 }

@@ -1,18 +1,18 @@
 package puresound;
 
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.TreeSet;
 
 import net.sf.jga.algorithms.Filter;
 
 public class ListaDiscos {
-	private TreeSet<Disco> lista;
+	private ArrayList<Disco> lista;
 
 	public ListaDiscos() {
-		this.lista = new TreeSet<Disco>();
+		this.lista = new ArrayList<Disco>();
 	}
 
-	public TreeSet<Disco> getLista() {
+	public ArrayList<Disco> getLista() {
 		return this.lista;
 	}
 	
@@ -27,11 +27,11 @@ public class ListaDiscos {
 	public boolean removeDisco(String pNombre) {
 		Disco disco = this.buscarDisco(pNombre);
 		if (disco != null)
-			return this.remove(disco);
+			return this.removeDisco(disco);
 		return false;
 	}
 	
-	public boolean remove(Disco pDisco) {
+	public boolean removeDisco(Disco pDisco) {
 		return this.getLista().remove(pDisco);
 	}
 	
@@ -39,9 +39,9 @@ public class ListaDiscos {
 		Disco disco = null;
 		Iterator<Disco> it = this.getIterator();
 		boolean salir = false;
-		while (it.hasNext() && salir) {
+		while (it.hasNext() && !salir) {
 			disco = it.next();
-			if (disco.compareTo(pNombre) == 0)
+			if (disco.getNombre().compareTo(pNombre) == 0)
 				salir = true;
 		}
 		return (salir)?disco:null;

@@ -1,18 +1,18 @@
 package puresound;
 
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.TreeSet;
 
 import net.sf.jga.algorithms.Filter;
 
 public class ListaCanciones {
-	private TreeSet<Cancion> lista;
+	private ArrayList<Cancion> lista;
 
 	public ListaCanciones() {
-		this.lista = new TreeSet<Cancion>();
+		this.lista = new ArrayList<Cancion>();
 	}
 	
-	public TreeSet<Cancion> getLista() {
+	public ArrayList<Cancion> getLista() {
 		return this.lista;
 	}
 	
@@ -35,7 +35,7 @@ public class ListaCanciones {
 		Cancion cancion = null;
 		Iterator<Cancion> it = this.getIterador();
 		boolean salir = false;
-		while (it.hasNext() && salir) {
+		while (it.hasNext() && !salir) {
 			cancion = it.next();
 			if (cancion.compareTo(pNombre) == 0)
 				salir = true;

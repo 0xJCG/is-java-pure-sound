@@ -1,16 +1,16 @@
 package puresound;
 
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.TreeSet;
 
 public class ListaMusicos {
-	private TreeSet<Musico> lista;
+	private ArrayList<Musico> lista;
 	
 	public ListaMusicos() {
-		this.lista = new TreeSet<Musico>();
+		this.lista = new ArrayList<Musico>();
 	}
 
-	public TreeSet<Musico> getLista() {
+	public ArrayList<Musico> getLista() {
 		return this.lista;
 	}
 	
@@ -33,11 +33,11 @@ public class ListaMusicos {
 		return this.getLista().remove(pMusico);
 	}
 	
-	private Musico buscarMusico(String pNombre) {
+	public Musico buscarMusico(String pNombre) {
 		Musico musico = null;
 		Iterator<Musico> it = this.getIterator();
 		boolean salir = false;
-		while (it.hasNext() && salir) {
+		while (it.hasNext() && !salir) {
 			musico = it.next();
 			if (musico.compareTo(pNombre) == 0)
 				salir = true;

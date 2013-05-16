@@ -1,21 +1,23 @@
 package puresound;
 
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.TreeSet;
+
+import net.sf.jga.algorithms.Sort;
 
 public class ListaEventos {
 	private static ListaEventos mListaEventos = new ListaEventos();
-	private TreeSet<Evento> lista;
+	private ArrayList<Evento> lista;
 
 	private ListaEventos() {
-		this.lista = new TreeSet<Evento>();
+		this.lista = new ArrayList<Evento>();
 	}
 	
 	public static ListaEventos getListaEventos() {
 		return mListaEventos;
 	}
 	
-	private TreeSet<Evento> getLista() {
+	private ArrayList<Evento> getLista() {
 		return ListaEventos.getListaEventos().lista;
 	}
 	
@@ -38,16 +40,20 @@ public class ListaEventos {
 		return this.getLista().remove(pEvento);
 	}
 	
-	private Evento buscarEvento(String pNombre) {
+	public Evento buscarEvento(String pNombre) {
 		Evento evento = null;
 		Iterator<Evento> it = this.getIterator();
 		boolean salir = false;
-		while (it.hasNext() && salir) {
+		while (it.hasNext() && !salir) {
 			evento = it.next();
-			if (evento.compareTo(pNombre) == 0)
+			if (evento.getNombre().compareTo(pNombre) == 0)
 				salir = true;
 		}
 		return (salir)?evento:null;
+	}
+	
+	public Iterable<Evento> OrdenarPorNombreE() {
+		return Sort.sort(this.getLista(), new OrdenarPorNombreE());
 	}
 	
 	public Iterable<Evento> filtrarProximosEventos() {

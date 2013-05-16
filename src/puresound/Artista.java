@@ -2,7 +2,7 @@ package puresound;
 
 import java.util.Calendar;
 
-public abstract class Artista implements Comparable<String> {
+public abstract class Artista implements Comparable<Artista> {
 	private String nombre;
 	private Calendar fechaFormacion;
 	private boolean enActivo;
@@ -49,8 +49,12 @@ public abstract class Artista implements Comparable<String> {
 		this.getDiscografia().removeDisco(pNombre);
 	}
 	
-	public void buscarDisco(String pNombre){
-		this.getDiscografia().buscarDisco(pNombre);
+	public void removeDisco(Disco pDisco){
+		this.getDiscografia().removeDisco(pDisco);
+	}
+	
+	public Disco buscarDisco(String pNombre){
+		return this.getDiscografia().buscarDisco(pNombre);
 	}
 	
 	public void cambiarEstado() {
@@ -67,7 +71,7 @@ public abstract class Artista implements Comparable<String> {
 		System.out.println((this.estaActivo())?"Si":"No");
 	}
 	
-	public int compareTo(String pNombre) {
-		return (this.getNombre().compareTo(pNombre));
+	public int compareTo(Artista pArtista) {
+		return (this.getNombre().compareTo(pArtista.getNombre()));
 	}
 }

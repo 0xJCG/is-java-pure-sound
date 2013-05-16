@@ -29,11 +29,12 @@ public class FestivalFuturoTest {
 		
 		fecha= Calendar.getInstance();
 		fecha.set(1990, 3, 10);
-		d1 = new Discografica("Disco", 2003);
 		m1= new Musico("Musico", fecha, "Somalia", Rol.CANTANTE);
 		lm1= new ListaMusicos();
+		d1 = new Discografica("Disco", 2003);
 		ff1 = new FestivalFuturo("Festival", fecha, "Alli", 1230, "Anuncio");
 		s1 = new Solista("Solista", fecha, m1, d1);
+		g1= new Grupo("Frupo", fecha, d1);
 		
 		ff1.addArtista(g1);
 		ff1.addArtista(s1);
@@ -43,11 +44,18 @@ public class FestivalFuturoTest {
 	public void tearDown() throws Exception {
 		ff1=null;
 		fecha=null;
+		m1=null;
+		lm1=null;
+		d1=null;
+		s1=null;
+		g1=null;
+		
 	}
 
 	@Test
 	public void testCompareTo() {
-		assertEquals(ff1.compareTo("Festival"),0);
+		FestivalFuturo ff2 = new FestivalFuturo("Festival", fecha, "Alli", 1230, "Anuncio");
+		assertEquals(ff1.compareTo(ff2),0);
 	}
 	/*@Test
 	public void testAddArtista(){

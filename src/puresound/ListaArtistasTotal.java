@@ -40,11 +40,11 @@ public class ListaArtistasTotal {
 		this.getLista().mostrarDatosArtista(pNombre);
 	}
 	
+	public Iterable<Artista> OrdenarPorNombreA() {
+		return this.getLista().OrdenarPorNombreA();
+	} 
+	
 	public Iterable<Artista> filtrarPorDiscografica(Discografica pDiscografica) {
 		return this.getLista().filtrarPorDiscografica(pDiscografica);
-	}
-	
-	public Iterable<Artista> filtrarPorNombre(String pNombre) {
-		return this.getLista().filtrarPorNombre(pNombre);
 	}
 }

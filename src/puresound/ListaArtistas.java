@@ -1,18 +1,19 @@
 package puresound;
 
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.TreeSet;
 
 import net.sf.jga.algorithms.Filter;
+import net.sf.jga.algorithms.Sort;
 
-public class ListaArtistas {
-	private TreeSet<Artista> lista;
+public class ListaArtistas implements Iterable<Artista> {
+	private ArrayList<Artista> lista;
 	
 	public ListaArtistas() {
-		this.lista = new TreeSet<Artista>(); 
+		this.lista = new ArrayList<Artista>(); 
 	}
 	
-	public TreeSet<Artista> getLista() {
+	public ArrayList<Artista> getLista() {
 		return this.lista;
 	}
 	
@@ -39,9 +40,9 @@ public class ListaArtistas {
 		Artista artista = null;
 		Iterator<Artista> it = this.getIterador();
 		boolean salir = false;
-		while (it.hasNext() && salir) {
+		while (it.hasNext() && !salir) {
 			artista = it.next();
-			if (artista.compareTo(pNombre) == 0)
+			if (artista.getNombre().compareTo(pNombre) == 0)
 				salir = true;
 		}
 		return (salir)?artista:null;
@@ -58,11 +59,15 @@ public class ListaArtistas {
 		this.buscarArtista(pNombre).mostrarDatos();
 	}
 	
+	public Iterable<Artista> OrdenarPorNombreA() {
+		return Sort.sort(this.getLista(), new OrdenarPorNombreA());
+	} 
+	
 	public Iterable<Artista> filtrarPorDiscografica(Discografica pDiscografica) {
 		return Filter.filter(this.getLista(), new FiltrarPorDiscografica(pDiscografica));
 	}
-	
-	public Iterable<Artista> filtrarPorNombre(String pNombre) {
-		return Filter.filter(this.getLista(), new FiltrarPorNombre(pNombre));
+
+	public Iterator<Artista> iterator() {
+		return this.getIterador();
 	}
 }

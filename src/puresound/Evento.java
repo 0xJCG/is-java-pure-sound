@@ -2,7 +2,7 @@ package puresound;
 
 import java.util.Calendar;
 
-public abstract class Evento implements Comparable<String> {
+public abstract class Evento implements Comparable<Evento> {
 	private String nombre;
 	private Calendar fecha;
 	private String lugar;
@@ -25,7 +25,7 @@ public abstract class Evento implements Comparable<String> {
 		return this.lugar;
 	}
 
-	public int compareTo(String pNombre) {
-		return (this.getNombre().compareTo(pNombre));
+	public int compareTo(Evento pEvento) {
+		return (this.getNombre().compareTo(pEvento.getNombre()));
 	}
 }
