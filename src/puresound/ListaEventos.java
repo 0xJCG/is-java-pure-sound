@@ -2,10 +2,11 @@ package puresound;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Observable;
 
 import net.sf.jga.algorithms.Sort;
 
-public class ListaEventos {
+public class ListaEventos extends Observable implements Iterable<Evento> {
 	private static ListaEventos mListaEventos = new ListaEventos();
 	private ArrayList<Evento> lista;
 
@@ -66,5 +67,9 @@ public class ListaEventos {
 	
 	public Iterable<Evento> filtrarPorArtista(Artista pArtista) {
 		return null;
+	}
+	
+	public Iterator<Evento> iterator() {
+		return this.getLista().iterator();
 	}
 }

@@ -1,6 +1,9 @@
 package puresound;
 
-public class ListaArtistasTotal {
+import java.util.Iterator;
+import java.util.Observable;
+
+public class ListaArtistasTotal extends Observable implements Iterable<Artista> {
 	private static ListaArtistasTotal mListaArtistasTotal = new ListaArtistasTotal();
 	private ListaArtistas lista;
 
@@ -46,5 +49,9 @@ public class ListaArtistasTotal {
 	
 	public Iterable<Artista> filtrarPorDiscografica(Discografica pDiscografica) {
 		return this.getLista().filtrarPorDiscografica(pDiscografica);
+	}
+	
+	public Iterator<Artista> iterator() {
+		return this.getLista().iterator();
 	}
 }

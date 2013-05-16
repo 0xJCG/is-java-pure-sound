@@ -1,6 +1,6 @@
 package puresound;
 
-public enum Rol {BAJO,TECLADO,CORO,CANTANTE,GUITARRA,BATERIA}
+public enum Rol {BAJO,TECLADO,CORO,CANTANTE,GUITARRA,BATERIA,DJ}
 
 	
 

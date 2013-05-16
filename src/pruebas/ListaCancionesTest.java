@@ -9,7 +9,6 @@ import org.junit.Test;
 import puresound.Cancion;
 import puresound.Genero;
 import puresound.ListaCanciones;
-import puresound.ListaCancionesFavoritas;
 import puresound.Puntuacion;
 
 public class ListaCancionesTest {
