@@ -1,6 +1,8 @@
 package puresound;
 
-public class ListaCancionesFavoritas {
+import java.util.Iterator;
+
+public class ListaCancionesFavoritas implements Iterable<Cancion> {
 	private static ListaCancionesFavoritas mListaCancionesFavoritas = new ListaCancionesFavoritas();
 	private ListaCanciones lista;
 	
@@ -34,5 +36,10 @@ public class ListaCancionesFavoritas {
 	
 	public Iterable<Cancion> filtrarPorGenero(Genero pGenero) {
 		return this.getLista().filtrarPorGenero(pGenero);
+	}
+
+	@Override
+	public Iterator<Cancion> iterator() {
+		return this.getLista().iterator();
 	}
 }

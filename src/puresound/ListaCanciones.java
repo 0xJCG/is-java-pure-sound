@@ -5,7 +5,7 @@ import java.util.Iterator;
 
 import net.sf.jga.algorithms.Filter;
 
-public class ListaCanciones {
+public class ListaCanciones implements Iterable<Cancion> {
 	private ArrayList<Cancion> lista;
 
 	public ListaCanciones() {
@@ -60,5 +60,10 @@ public class ListaCanciones {
 	
 	public Iterable<Cancion> filtrarPorGenero(Genero pGenero) {
 		return Filter.filter(this.getLista(), new FiltrarPorGenero(pGenero));
+	}
+
+	@Override
+	public Iterator<Cancion> iterator() {
+		return this.getIterador();
 	}	
 }

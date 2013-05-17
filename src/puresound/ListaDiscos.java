@@ -5,7 +5,7 @@ import java.util.Iterator;
 
 import net.sf.jga.algorithms.Filter;
 
-public class ListaDiscos {
+public class ListaDiscos implements Iterable<Disco> {
 	private ArrayList<Disco> lista;
 
 	public ListaDiscos() {
@@ -53,5 +53,10 @@ public class ListaDiscos {
 	
 	public Iterable<Disco> filtrarPorFormato(Formato pFormato) {
 		return Filter.filter(this.getLista(), new FiltrarPorFormato(pFormato));
+	}
+
+	@Override
+	public Iterator<Disco> iterator() {
+		return this.getIterator();
 	}
 }
