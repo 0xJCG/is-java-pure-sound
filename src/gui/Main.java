@@ -13,8 +13,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-import puresound.ListaArtistasTotal;
-import puresound.ListaEventos;
+import puresound.ListaArtistasFavoritos;
 
 @SuppressWarnings("serial")
 public class Main extends JFrame {
@@ -73,23 +72,9 @@ public class Main extends JFrame {
         menuBar.add(menu);
 
         /* Submenú Mostrar */
-        item = new JMenuItem("Artistas");
-        menu.add(item);
-        item.addActionListener(new MenuArtistasActionListener());
-        
         item = new JMenuItem("Datos");
         menu.add(item);
         item.addActionListener(new MenuDatosActionListener());
-        
-        item = new JMenuItem("Eventos");
-        menu.add(item);
-        item.addActionListener(new MenuEventosActionListener());
-        
-        menu.addSeparator(); // Separador entre submenús.
-        
-        item = new JMenuItem("Panel de usuario");
-        menu.add(item);
-        item.addActionListener(new MenuUsuarioActionListener());
         
         /* Menú Ayuda */
         menu = new JMenu("Ayuda");
@@ -114,31 +99,10 @@ public class Main extends JFrame {
 		}
 	}
 	
-	private class MenuArtistasActionListener implements ActionListener {
-		ListaArtistasTotal model = ListaArtistasTotal.getListaArtistasTotal();
-		public void actionPerformed(ActionEvent e) {
-			cambiarPanel(new Artistas(model), null);
-		}
-	}
-	
 	private class MenuDatosActionListener implements ActionListener {
-		//ListaArtistasFavoritos model = ListaArtistasFavoritos.getListaArtistasFavoritos();
+		ListaArtistasFavoritos model = ListaArtistasFavoritos.getListaArtistasFavoritos();
 		public void actionPerformed(ActionEvent e) {
-			cambiarPanel(new Datos(), new User()); //model));
-		}
-	}
-	
-	private class MenuEventosActionListener implements ActionListener {
-		ListaEventos model = ListaEventos.getListaEventos();
-		public void actionPerformed(ActionEvent e) {
-			cambiarPanel(new Eventos(model), null);
-		}
-	}
-	
-	private class MenuUsuarioActionListener implements ActionListener {
-		//ListaArtistasFavoritos model = ListaArtistasFavoritos.getListaArtistasFavoritos();
-		public void actionPerformed(ActionEvent e) {
-			cambiarPanel(new User(), null); //model), null);
+			cambiarPanel(new Datos(), new User(model));
 		}
 	}
 

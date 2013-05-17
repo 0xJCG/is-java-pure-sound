@@ -20,7 +20,9 @@ public class ListaArtistasFavoritos extends Observable implements Iterable<Artis
 	}
 	
 	public void addArtista(Artista pArtista) {
-		this.getLista().addArtista(pArtista);
+		/* Avisa a los observadores de algún cambio. */
+		setChanged();
+		notifyObservers(this.getLista().addArtista(pArtista));
 	}
 	
 	public boolean removeArtista(String pNombre) {
@@ -28,6 +30,9 @@ public class ListaArtistasFavoritos extends Observable implements Iterable<Artis
 	}
 	
 	public boolean remove(Artista pArtista) {
+		/* Avisa a los observadores de algún cambio. */
+		setChanged();
+		notifyObservers();
 		return this.getLista().remove(pArtista);
 	}
 	

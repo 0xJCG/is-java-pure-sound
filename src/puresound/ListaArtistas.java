@@ -21,8 +21,12 @@ public class ListaArtistas implements Iterable<Artista> {
 		return this.getLista().iterator();
 	}
 	
-	public void addArtista(Artista pArtista) {
-		this.getLista().add(pArtista);
+	public Artista addArtista(Artista pArtista) {
+		if (!this.getLista().contains(pArtista)) {
+			this.getLista().add(pArtista);
+			return pArtista;
+		}
+		return null;
 	}
 	
 	public boolean removeArtista(String pNombre) {
