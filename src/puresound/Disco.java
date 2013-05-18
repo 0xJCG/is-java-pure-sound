@@ -30,7 +30,7 @@ public class Disco implements Comparable<Disco> {
 	}
 	
 	public void addCancion(Cancion pCancion){
-		this.getCanciones().getLista().add(pCancion);
+		this.getCanciones().addCancion(pCancion);
 	}
 	
 	public void removeCancion(String pNombre) {

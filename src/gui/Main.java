@@ -1,8 +1,10 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -14,11 +16,13 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 import puresound.ListaArtistasFavoritos;
+import puresound.ListaArtistasTotal;
 
 @SuppressWarnings("serial")
 public class Main extends JFrame {
 
 	private JPanel contentPane = new JPanel();
+	private JMenuBar menuBar;
 
 	/**
 	 * Launch the application.
@@ -42,7 +46,12 @@ public class Main extends JFrame {
 	public Main() {
 		setTitle("PureSound");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 600);
+		
+		/* Cargamos la ventana en el centro de la pantalla. */
+		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+		int x = (screen.width / 2) - (800 / 2); // Center horizontally.
+		int y = (screen.height / 2) - (600 / 2); // Center vertically.
+		setBounds(x, y, 800, 600);
 		
 		/* Ponemos la barra de menú. */
         ponerMenu();
@@ -55,7 +64,7 @@ public class Main extends JFrame {
 	}
 	
 	private void ponerMenu() {
-		JMenuBar menuBar = new JMenuBar();
+		menuBar = new JMenuBar();
 
         /* Menú Archivo */
         JMenu menu = new JMenu("Archivo");
@@ -100,9 +109,10 @@ public class Main extends JFrame {
 	}
 	
 	private class MenuDatosActionListener implements ActionListener {
-		ListaArtistasFavoritos model = ListaArtistasFavoritos.getListaArtistasFavoritos();
+		ListaArtistasFavoritos fav = ListaArtistasFavoritos.getListaArtistasFavoritos();
+		ListaArtistasTotal art = ListaArtistasTotal.getListaArtistasTotal();
 		public void actionPerformed(ActionEvent e) {
-			cambiarPanel(new Datos(), new User(model));
+			cambiarPanel(new Datos(art), new User(fav));
 		}
 	}
 

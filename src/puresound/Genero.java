@@ -1,3 +1,3 @@
 package puresound;
 
-public enum Genero {POP,ROCK,CLASICA}
+public enum Genero {POP,ROCK,CLASICA,ELECTRONICA}

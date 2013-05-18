@@ -43,8 +43,11 @@ public class ListaArtistasTotal extends Observable implements Iterable<Artista> 
 		this.getLista().mostrarDatosArtista(pNombre);
 	}
 	
-	public Iterable<Artista> OrdenarPorNombreA() {
-		return this.getLista().OrdenarPorNombreA();
+	public void OrdenarPorNombreA() {
+		/* Avisa a los observadores de algún cambio. */
+		setChanged();
+		notifyObservers();
+		this.getLista().OrdenarPorNombreA();
 	} 
 	
 	public Iterable<Artista> filtrarPorDiscografica(Discografica pDiscografica) {

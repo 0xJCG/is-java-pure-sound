@@ -13,7 +13,7 @@ public class ListaArtistas implements Iterable<Artista> {
 		this.lista = new ArrayList<Artista>(); 
 	}
 	
-	public ArrayList<Artista> getLista() {
+	private ArrayList<Artista> getLista() {
 		return this.lista;
 	}
 	
@@ -63,8 +63,8 @@ public class ListaArtistas implements Iterable<Artista> {
 		this.buscarArtista(pNombre).mostrarDatos();
 	}
 	
-	public Iterable<Artista> OrdenarPorNombreA() {
-		return Sort.sort(this.getLista(), new OrdenarPorNombreA());
+	public void OrdenarPorNombreA() {
+		this.lista = (ArrayList<Artista>) Sort.sort(this.getLista(), new OrdenarPorNombreA());
 	} 
 	
 	public Iterable<Artista> filtrarPorDiscografica(Discografica pDiscografica) {
@@ -73,5 +73,9 @@ public class ListaArtistas implements Iterable<Artista> {
 
 	public Iterator<Artista> iterator() {
 		return this.getIterador();
+	}
+	
+	public boolean esta(Artista pArtista) {
+		return this.getLista().contains(pArtista);
 	}
 }

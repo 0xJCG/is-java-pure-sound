@@ -48,8 +48,8 @@ public class ListaArtistasFavoritos extends Observable implements Iterable<Artis
 		this.getLista().mostrarDatosArtista(pNombre);
 	}
 	
-	public Iterable<Artista> OrdenarPorNombreA() {
-		return this.getLista().OrdenarPorNombreA();
+	public void OrdenarPorNombreA() {
+		this.getLista().OrdenarPorNombreA();
 	}
 	
 	public Iterable<Artista> filtrarPorDiscografica(Discografica pDiscografica) {
@@ -58,5 +58,9 @@ public class ListaArtistasFavoritos extends Observable implements Iterable<Artis
 	
 	public Iterator<Artista> iterator() {
 		return this.getLista().iterator();
+	}
+	
+	public boolean esta(Artista pArtista) {
+		return this.getLista().esta(pArtista);
 	}
 }

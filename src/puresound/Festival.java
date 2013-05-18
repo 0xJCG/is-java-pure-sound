@@ -10,7 +10,7 @@ public abstract class Festival extends Evento {
 		this.listaArtistas = new ListaArtistas();
 	}
 
-	private ListaArtistas getListaArtistas() {
+	public ListaArtistas getListaArtistas() {
 		return this.listaArtistas;
 	}
 	
