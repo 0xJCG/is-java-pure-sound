@@ -1,20 +1,19 @@
 package gui;
 
-import javax.swing.JPanel;
+import javax.swing.BoxLayout;
+import javax.swing.JDialog;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 
 @SuppressWarnings("serial")
-public class Busqueda extends JPanel {
-	private JTextField txtTexto;
-
-	/**
-	 * Create the panel.
-	 */
+public class Busqueda extends JDialog {
 	public Busqueda() {
+		setTitle("Búsqueda");
 		
-		txtTexto = new JTextField();
+		getContentPane().setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
+		
+		JTextField txtTexto = new JTextField();
 		txtTexto.setText("Introduce el texto a buscar...");
 		add(txtTexto);
 		txtTexto.setColumns(20);
@@ -29,8 +28,5 @@ public class Busqueda extends JPanel {
 		
 		JButton btnBuscar = new JButton("Buscar");
 		add(btnBuscar);
-
-		setSize(800, 100);
 	}
-
 }

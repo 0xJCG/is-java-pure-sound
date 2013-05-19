@@ -30,9 +30,6 @@ public class ListaArtistasFavoritos extends Observable implements Iterable<Artis
 	}
 	
 	public boolean remove(Artista pArtista) {
-		/* Avisa a los observadores de algún cambio. */
-		setChanged();
-		notifyObservers();
 		return this.getLista().remove(pArtista);
 	}
 	

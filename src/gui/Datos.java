@@ -1,10 +1,9 @@
 package gui;
 
-import java.awt.GridLayout;
+import java.awt.Color;
 import java.util.Iterator;
-import java.util.Observable;
-import java.util.Observer;
 
+import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -26,44 +25,44 @@ import puresound.Festival;
 import puresound.ListaArtistasFavoritos;
 import puresound.ListaArtistasTotal;
 import puresound.ListaEventos;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.awt.Font;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
-public class Datos extends JPanel implements Observer, TreeSelectionListener {
+public class Datos extends JPanel implements TreeSelectionListener {
 	private JTree tree = null;
-	private DefaultMutableTreeNode raiz;
-	private DefaultMutableTreeNode artistas;
-	private DefaultMutableTreeNode eventos;
-	private DefaultTreeModel modelo;
+	private DefaultMutableTreeNode raiz = new DefaultMutableTreeNode("PureSound");
+	private DefaultTreeModel modelo = new DefaultTreeModel(raiz);
 	
 	/**
 	 * Create the panel.
 	 */
-	public Datos(ListaArtistasTotal model) {
-		this.setLayout(new GridLayout(2, 1));
+	public Datos() {
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		
+		JLabel lblAyuda = new JLabel("Seleccione los elementos y aparecerán diferentes mensajes.");
+		lblAyuda.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAyuda.setForeground(new Color(30, 144, 255));
+		lblAyuda.setBackground(new Color(255, 255, 255));
+		lblAyuda.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+		this.setBackground(Color.WHITE);
+		
+		add(lblAyuda);
+		
+		tree = new JTree(raiz);
+		tree.setBorder(null);
+		tree.setEditable(false);
+		tree.setForeground(new Color(30, 144, 255));
+		tree.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		
 		this.pintarArbol();
 		
-        
         tree.addTreeSelectionListener(this);
-        
-        JButton btnOrdenarArtistasNombre = new JButton("Ordenar Artistas por nombre");
-        btnOrdenarArtistasNombre.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent arg0) {
-        		ListaArtistasTotal.getListaArtistasTotal().OrdenarPorNombreA();
-        	}
-        });
-        add(btnOrdenarArtistasNombre);
-        
-       
         
         /* Expandimos todos los nodos para que sean visibles. */
         for (int i = 0; i < tree.getRowCount(); i++)
             tree.expandRow(i);
-        
-        model.addObserver(this);
 	}
 	
 	@Override
@@ -83,41 +82,59 @@ public class Datos extends JPanel implements Observer, TreeSelectionListener {
 			} else if (ultimoNodo.getParent().toString().equals("Eventos")) {
 				Evento ev = ListaEventos.getListaEventos().buscarEvento(node.toString());
 				JOptionPane.showMessageDialog(this, ev.getNombre());
+			} else if (nodos.length == 5) {
+				/* Creamos un JDialog que será el reproductor y saldrá cuando pulsemos en su menú. */
+				String ar = ultimoNodo.getParent().getParent().toString();
+				String di = ultimoNodo.getParent().toString();
+				String ca = node.toString();
+				Cancion cancion = ListaArtistasTotal.getListaArtistasTotal().buscarCancionDiscoArtista(ar, di, ca);
+				Reproductor reproductor = new Reproductor(cancion);
+				reproductor.pack();
+				reproductor.setLocationRelativeTo(this);
+				reproductor.setVisible(true);
+				reproductor.setAlwaysOnTop(true);
+				reproductor.setSize(600, 480);
 			}
 		}
 	}
 	
 	private void pintarArbol() {
-		if (tree != null) {
-			tree.remove(0);
-		}
-		raiz = new DefaultMutableTreeNode("PureSound");
-		artistas = new DefaultMutableTreeNode("Artistas");
-		eventos = new DefaultMutableTreeNode("Eventos");
-		modelo = new DefaultTreeModel(raiz);
+		DefaultMutableTreeNode artistas = new DefaultMutableTreeNode("Artistas");
+		DefaultMutableTreeNode eventos = new DefaultMutableTreeNode("Eventos");
+		
+		raiz.removeAllChildren();
 		int contadorA = 0;
 		int contadorD = 0;
 		int contadorC = 0;
 		int contadorE = 0;
+		
+		/*raiz.add(artistas);
+		raiz.add(eventos);*/
+		
 		modelo.insertNodeInto(artistas, raiz, 0);
 		modelo.insertNodeInto(eventos, raiz, 1);
+		
+		ListaArtistasTotal.getListaArtistasTotal().OrdenarPorNombreA(); // Ordenamos los datos.
 		Iterator<Artista> itA = ListaArtistasTotal.getListaArtistasTotal().iterator();
         while (itA.hasNext()) {
 			Artista ar = itA.next();
 			DefaultMutableTreeNode artista = new DefaultMutableTreeNode(ar.getNombre());
 			modelo.insertNodeInto(artista, artistas, contadorA);
+			//artistas.add(artista);
 			contadorA++;
 			Iterator<Disco> itD = ar.getDiscografia().iterator();
 			while (itD.hasNext()) {
 				Disco di = itD.next();
 				DefaultMutableTreeNode disco = new DefaultMutableTreeNode(di.getNombre());
 				modelo.insertNodeInto(disco, artista, contadorD);
+				//artista.add(disco);
 				contadorD++;
 				Iterator<Cancion> itC = di.getCanciones().iterator();
 				while (itC.hasNext()) {
 					Cancion ca = itC.next();
 					DefaultMutableTreeNode cancion = new DefaultMutableTreeNode(ca.getNombre());
 					modelo.insertNodeInto(cancion, disco, contadorC);
+					//disco.add(cancion);
 					contadorC++;
 				}
 				contadorC = 0;
@@ -129,11 +146,13 @@ public class Datos extends JPanel implements Observer, TreeSelectionListener {
 			Evento ev = itE.next();
 			DefaultMutableTreeNode evento = new DefaultMutableTreeNode(ev.getNombre());
 			modelo.insertNodeInto(evento, eventos, contadorE);
+			//eventos.add(evento);
 			contadorE++;
 			if (ev.getClass().equals(ConciertoPasado.class) || ev.getClass().equals(ConciertoFuturo.class)) {
 				Concierto co = (Concierto) ev;
 				DefaultMutableTreeNode artista = new DefaultMutableTreeNode(co.getArtista().getNombre());
 				modelo.insertNodeInto(artista, evento, 0);
+				//evento.add(artista);
 			} else {
 				Festival fe = (Festival) ev;
 				Iterator<Artista> itArF = fe.getListaArtistas().iterator();
@@ -142,22 +161,14 @@ public class Datos extends JPanel implements Observer, TreeSelectionListener {
 					Artista ar = itArF.next();
 					DefaultMutableTreeNode artista = new DefaultMutableTreeNode(ar.getNombre());
 					modelo.insertNodeInto(artista, evento, contadorArF);
+					//evento.add(artista);
 					contadorArF++;
 				}
 			}
         }
         
-        tree = new JTree(modelo);
-        
         /* Diremos que salgan las barras de scroll cuando el JTree no entre en el panel. */
         JScrollPane sPane = new JScrollPane(tree, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         add(sPane);
-	}
-
-	@Override
-	public void update(Observable o, Object arg) {
-		pintarArbol();
-		modelo.nodeStructureChanged(artistas);
-		modelo.nodeChanged(artistas);
 	}
 }

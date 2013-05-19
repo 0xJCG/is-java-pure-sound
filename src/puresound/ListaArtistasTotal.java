@@ -57,4 +57,13 @@ public class ListaArtistasTotal extends Observable implements Iterable<Artista> 
 	public Iterator<Artista> iterator() {
 		return this.getLista().iterator();
 	}
+	
+	public Cancion buscarCancionDiscoArtista(String pArtista, String pDisco, String pCancion) {
+		Artista ar = this.getLista().buscarArtista(pArtista);
+		if (ar != null) {
+			Cancion ca = ar.getDiscografia().buscarCancion(pDisco, pCancion);
+			return ca;
+		}
+		return null;
+	}
 }
