@@ -34,6 +34,7 @@ public class Main extends JFrame {
 	private JMenuBar menuBar;
 	private JDialog ayuda = new Ayuda();
 	private JDialog buscar = new Busqueda();
+	private JDialog filtros = new Filtros();
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -110,12 +111,21 @@ public class Main extends JFrame {
 		ayuda.setLocationRelativeTo(this);
 		ayuda.setVisible(false);
 		ayuda.setSize(600, 480);
+		ayuda.setAlwaysOnTop(true);
 		
 		/* Creamos un JDialog que será la búsqueda y saldrá cuando pulsemos en su menú. */
 		buscar.pack();
 		buscar.setLocationRelativeTo(this);
 		buscar.setVisible(false);
-		buscar.setSize(600, 480);		
+		buscar.setSize(600, 480);	
+		buscar.setAlwaysOnTop(true);
+		
+		/* Creamos un JDialog que serán los filtros y saldrá cuando pulsemos en su menú. */
+		filtros.pack();
+		filtros.setLocationRelativeTo(this);
+		filtros.setVisible(false);
+		filtros.setSize(600, 480);	
+		filtros.setAlwaysOnTop(true);
 	}
 	
 	private void ponerMenu() {
@@ -149,6 +159,12 @@ public class Main extends JFrame {
         item.setForeground(new Color(30, 144, 255));
         menu.add(item);
         item.addActionListener(new MenuBuscarActionListener());
+        
+        item = new JMenuItem("Filtrados");
+        item.setBackground(new Color(255, 255, 255));
+        item.setForeground(new Color(30, 144, 255));
+        menu.add(item);
+        item.addActionListener(new MenuFiltrarActionListener());
         
         /* Menú Ayuda */
         menu = new JMenu("Ayuda");
@@ -188,6 +204,15 @@ public class Main extends JFrame {
 				buscar.setVisible(false);
 			else
 				buscar.setVisible(true);
+		}
+	}
+	
+	private class MenuFiltrarActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			if (filtros.isVisible())
+				filtros.setVisible(false);
+			else
+				filtros.setVisible(true);
 		}
 	}
 	

@@ -1,5 +1,7 @@
 package gui;
 
+import java.awt.Color;
+
 import javax.swing.BoxLayout;
 import javax.swing.JDialog;
 import javax.swing.JButton;
@@ -10,6 +12,7 @@ import javax.swing.JComboBox;
 public class Busqueda extends JDialog {
 	public Busqueda() {
 		setTitle("Búsqueda");
+		getContentPane().setBackground(new Color(255, 255, 255));
 		
 		getContentPane().setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
 		
