@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Observable;
 
+import net.sf.jga.algorithms.Filter;
 import net.sf.jga.algorithms.Sort;
 
 public class ListaEventos extends Observable implements Iterable<Evento> {
@@ -53,20 +54,16 @@ public class ListaEventos extends Observable implements Iterable<Evento> {
 		return (salir)?evento:null;
 	}
 	
-	public Iterable<Evento> OrdenarPorNombreE() {
-		return Sort.sort(this.getLista(), new OrdenarPorNombreE());
+	public void OrdenarPorNombreE() {
+		this.lista = (ArrayList<Evento>) Sort.sort(this.getLista(), new OrdenarPorNombreE());
 	}
 	
 	public Iterable<Evento> filtrarProximosEventos() {
-		return null;
+		return Filter.filter(this.getLista(), new FiltrarProximosEventos());
 	}
 	
 	public Iterable<Evento> filtrarEventosPasados() {
-		return null;
-	}
-	
-	public Iterable<Evento> filtrarPorArtista(Artista pArtista) {
-		return null;
+		return Filter.filter(this.getLista(), new FiltrarEventosPasados());
 	}
 	
 	public Iterator<Evento> iterator() {

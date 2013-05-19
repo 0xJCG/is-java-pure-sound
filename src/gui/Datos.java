@@ -11,7 +11,6 @@ import javax.swing.JTree;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
 import puresound.Artista;
@@ -33,11 +32,7 @@ import javax.swing.SwingConstants;
 public class Datos extends JPanel implements TreeSelectionListener {
 	private JTree tree = null;
 	private DefaultMutableTreeNode raiz = new DefaultMutableTreeNode("PureSound");
-	private DefaultTreeModel modelo = new DefaultTreeModel(raiz);
 	
-	/**
-	 * Create the panel.
-	 */
 	public Datos() {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
@@ -102,67 +97,47 @@ public class Datos extends JPanel implements TreeSelectionListener {
 		DefaultMutableTreeNode artistas = new DefaultMutableTreeNode("Artistas");
 		DefaultMutableTreeNode eventos = new DefaultMutableTreeNode("Eventos");
 		
-		raiz.removeAllChildren();
-		int contadorA = 0;
-		int contadorD = 0;
-		int contadorC = 0;
-		int contadorE = 0;
-		
-		/*raiz.add(artistas);
-		raiz.add(eventos);*/
-		
-		modelo.insertNodeInto(artistas, raiz, 0);
-		modelo.insertNodeInto(eventos, raiz, 1);
+		raiz.add(artistas);
 		
 		ListaArtistasTotal.getListaArtistasTotal().OrdenarPorNombreA(); // Ordenamos los datos.
 		Iterator<Artista> itA = ListaArtistasTotal.getListaArtistasTotal().iterator();
         while (itA.hasNext()) {
 			Artista ar = itA.next();
 			DefaultMutableTreeNode artista = new DefaultMutableTreeNode(ar.getNombre());
-			modelo.insertNodeInto(artista, artistas, contadorA);
-			//artistas.add(artista);
-			contadorA++;
+			artistas.add(artista);
 			Iterator<Disco> itD = ar.getDiscografia().iterator();
 			while (itD.hasNext()) {
 				Disco di = itD.next();
 				DefaultMutableTreeNode disco = new DefaultMutableTreeNode(di.getNombre());
-				modelo.insertNodeInto(disco, artista, contadorD);
-				//artista.add(disco);
-				contadorD++;
+				artista.add(disco);
 				Iterator<Cancion> itC = di.getCanciones().iterator();
 				while (itC.hasNext()) {
 					Cancion ca = itC.next();
 					DefaultMutableTreeNode cancion = new DefaultMutableTreeNode(ca.getNombre());
-					modelo.insertNodeInto(cancion, disco, contadorC);
-					//disco.add(cancion);
-					contadorC++;
+					disco.add(cancion);
 				}
-				contadorC = 0;
 			}
-			contadorD = 0;
         }
+        
+        raiz.add(eventos);
+        
+        ListaEventos.getListaEventos().OrdenarPorNombreE(); // Ordenamos los datos.
         Iterator<Evento> itE = ListaEventos.getListaEventos().iterator();
         while (itE.hasNext()) {
 			Evento ev = itE.next();
 			DefaultMutableTreeNode evento = new DefaultMutableTreeNode(ev.getNombre());
-			modelo.insertNodeInto(evento, eventos, contadorE);
-			//eventos.add(evento);
-			contadorE++;
+			eventos.add(evento);
 			if (ev.getClass().equals(ConciertoPasado.class) || ev.getClass().equals(ConciertoFuturo.class)) {
 				Concierto co = (Concierto) ev;
 				DefaultMutableTreeNode artista = new DefaultMutableTreeNode(co.getArtista().getNombre());
-				modelo.insertNodeInto(artista, evento, 0);
-				//evento.add(artista);
+				evento.add(artista);
 			} else {
 				Festival fe = (Festival) ev;
 				Iterator<Artista> itArF = fe.getListaArtistas().iterator();
-				int contadorArF = 0;
 				while (itArF.hasNext()) {
 					Artista ar = itArF.next();
 					DefaultMutableTreeNode artista = new DefaultMutableTreeNode(ar.getNombre());
-					modelo.insertNodeInto(artista, evento, contadorArF);
-					//evento.add(artista);
-					contadorArF++;
+					evento.add(artista);
 				}
 			}
         }
