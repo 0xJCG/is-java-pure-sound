@@ -64,11 +64,11 @@ public class ListaArtistas implements Iterable<Artista> {
 	}
 	
 	public void OrdenarPorNombreA() {
-		this.lista = (ArrayList<Artista>) Sort.sort(this.getLista(), new OrdenarPorNombreA());
+		this.lista = (ArrayList<Artista>) Sort.sort(this, new OrdenarPorNombreA());
 	} 
 	
 	public Iterable<Artista> filtrarPorDiscografica(Discografica pDiscografica) {
-		return Filter.filter(this.getLista(), new FiltrarPorDiscografica(pDiscografica));
+		return Filter.filter(this, new FiltrarPorDiscografica(pDiscografica));
 	}
 
 	public Iterator<Artista> iterator() {
