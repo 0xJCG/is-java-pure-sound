@@ -69,26 +69,28 @@ public class Datos extends JPanel implements TreeSelectionListener {
 			TreePath path = e.getPath();
 			Object[] nodos = path.getPath();
 			DefaultMutableTreeNode ultimoNodo = (DefaultMutableTreeNode) nodos[nodos.length-1];
-			if (ultimoNodo.getParent().toString().equals("Artistas")) { // Artista seleccionado.
-				if (JOptionPane.showConfirmDialog(this, "¿Añadir a " + node.toString() + " como artista favorito?") == 0) { // Si el usuario pulsa "Sí".
-					Artista ar = ListaArtistasTotal.getListaArtistasTotal().buscarArtista(node.toString()); // Buscamos el artista.
-					ListaArtistasFavoritos.getListaArtistasFavoritos().addArtista(ar); // Lo añadimos en la lista de favoritos.
+			if (nodos.length != 1) { // Si no es la raíz.
+				if (ultimoNodo.getParent().toString().equals("Artistas")) { // Artista seleccionado.
+					if (JOptionPane.showConfirmDialog(this, "¿Añadir a " + node.toString() + " como artista favorito?") == 0) { // Si el usuario pulsa "Sí".
+						Artista ar = ListaArtistasTotal.getListaArtistasTotal().buscarArtista(node.toString()); // Buscamos el artista.
+						ListaArtistasFavoritos.getListaArtistasFavoritos().addArtista(ar); // Lo añadimos en la lista de favoritos.
+					}
+				} else if (ultimoNodo.getParent().toString().equals("Eventos")) {
+					Evento ev = ListaEventos.getListaEventos().buscarEvento(node.toString());
+					JOptionPane.showMessageDialog(this, "Evento: " + ev.getNombre() + ". Lugar: " + ev.getLugar() + ". " + ev.getFecha().getTime());
+				} else if (nodos.length == 5) { // Canciones.
+					/* Creamos un JDialog que será el reproductor y saldrá cuando pulsemos en su menú. */
+					String ar = ultimoNodo.getParent().getParent().toString();
+					String di = ultimoNodo.getParent().toString();
+					String ca = node.toString();
+					Cancion cancion = ListaArtistasTotal.getListaArtistasTotal().buscarCancionDiscoArtista(ar, di, ca);
+					Reproductor reproductor = new Reproductor(cancion);
+					reproductor.pack();
+					reproductor.setLocationRelativeTo(this);
+					reproductor.setVisible(true);
+					reproductor.setAlwaysOnTop(true);
+					reproductor.setSize(600, 480);
 				}
-			} else if (ultimoNodo.getParent().toString().equals("Eventos")) {
-				Evento ev = ListaEventos.getListaEventos().buscarEvento(node.toString());
-				JOptionPane.showMessageDialog(this, ev.getNombre());
-			} else if (nodos.length == 5) {
-				/* Creamos un JDialog que será el reproductor y saldrá cuando pulsemos en su menú. */
-				String ar = ultimoNodo.getParent().getParent().toString();
-				String di = ultimoNodo.getParent().toString();
-				String ca = node.toString();
-				Cancion cancion = ListaArtistasTotal.getListaArtistasTotal().buscarCancionDiscoArtista(ar, di, ca);
-				Reproductor reproductor = new Reproductor(cancion);
-				reproductor.pack();
-				reproductor.setLocationRelativeTo(this);
-				reproductor.setVisible(true);
-				reproductor.setAlwaysOnTop(true);
-				reproductor.setSize(600, 480);
 			}
 		}
 	}

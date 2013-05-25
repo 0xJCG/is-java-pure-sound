@@ -68,7 +68,7 @@ public class CargaDeDatos {
 		try {
 			Document document = (Document) builder.build(xmlFile); // Se crea el documento a través del archivo.
 			Element rootNode = document.getRootElement(); // Se obtiene la raiz.
-			List list = rootNode.getChildren(); // Se obtiene la lista de hijos.
+			List list = rootNode.getChildren("discografica"); // Se obtiene la lista de hijos.
 			
 			/* <discograficas> */
 			for (int i = 0; i < list.size(); i++) {
@@ -86,7 +86,7 @@ public class CargaDeDatos {
 					/* <artistas> */
 					for (int k = 0; k < listaArtistas.size(); k++) {
 						Element artista = (Element) listaArtistas.get(k);
-						if (artista.getName().equals("grupo")) {
+						if (artista.getName().equals("grupo")) { // Grupo.
 							Grupo grupo = new Grupo(artista.getChildTextTrim("nombre"), Calendar.getInstance(), dscgrfc);
 	
 							/* <musicos> */
@@ -104,7 +104,7 @@ public class CargaDeDatos {
 								} // </musico>
 							} // </musicos>
 							ListaArtistasTotal.getListaArtistasTotal().addArtista(grupo);						
-						} else {
+						} else { // Solista.
 							Element musico = (Element) artista.getChildren("musico").get(0);
 							Rol rol = Rol.valueOf(musico.getChildTextTrim("rol"));
 							Musico m = new Musico(musico.getChildTextTrim("nombre"), Calendar.getInstance(), musico.getChildTextTrim("nacionalidad"), rol);
@@ -180,31 +180,31 @@ public class CargaDeDatos {
 			/* <eventos> */
 			for (int i = 0; i < list.size(); i++) {
 				Element evento = (Element) list.get(i); // Se obtiene el elemento 'discografica'.
-				if (evento.getName().equals("concierto")) {
+				if (evento.getName().equals("concierto")) { // Concierto.
 					String nombre = evento.getChildTextTrim("nombre"); // Se obtiene el valor que está entre las etiquetas '<nombre></nombre>'.
 					String lugar = evento.getChildTextTrim("lugar");
 					String artista = evento.getChildTextTrim("artista");
 					Artista ar = ListaArtistasTotal.getListaArtistasTotal().buscarArtista(artista);
 					Concierto concierto = null;
-					if (evento.getAttribute("tipo").getValue().equals("pasado")) {
+					if (evento.getAttribute("tipo").getValue().equals("pasado")) { // Pasado.
 						String resumen = evento.getChildTextTrim("resumen");
 						int asistencia = Integer.parseInt(evento.getChildTextTrim("asistencia"));
 						concierto = new ConciertoPasado(nombre, Calendar.getInstance(), lugar, ar, resumen, asistencia);
-					} else {
+					} else { // Futuro.
 						int aforo = Integer.parseInt(evento.getChildTextTrim("aforo"));
 						String anuncio = evento.getChildTextTrim("anuncio");
 						concierto = new ConciertoFuturo(nombre, Calendar.getInstance(), lugar, ar, aforo, anuncio);
 					}
 					ListaEventos.getListaEventos().addEvento(concierto);
-				} else {
+				} else { // Festival.
 					String nombre = evento.getChildTextTrim("nombre"); // Se obtiene el valor que está entre las etiquetas '<nombre></nombre>'.
 					String lugar = evento.getChildTextTrim("lugar");
 					Festival festival = null;
-					if (evento.getAttribute("tipo").getValue().equals("pasado")) {
+					if (evento.getAttribute("tipo").getValue().equals("pasado")) { // Pasado.
 						String resumen = evento.getChildTextTrim("resumen");
 						int asistencia = Integer.parseInt(evento.getChildTextTrim("asistencia"));
 						festival = new FestivalPasado(nombre, Calendar.getInstance(), lugar, resumen, asistencia);
-					} else {
+					} else { // Futuro.
 						int aforo = Integer.parseInt(evento.getChildTextTrim("aforo"));
 						String anuncio = evento.getChildTextTrim("anuncio");
 						festival = new FestivalFuturo(nombre, Calendar.getInstance(), lugar, aforo, anuncio);

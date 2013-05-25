@@ -33,7 +33,6 @@ public class Main extends JFrame {
 	private JPanel contentPane = new JPanel();
 	private JMenuBar menuBar;
 	private JDialog ayuda = new Ayuda();
-	private JDialog buscar = new Busqueda();
 	private JDialog filtros = new Filtros();
 	
 	public static void main(String[] args) {
@@ -113,13 +112,6 @@ public class Main extends JFrame {
 		ayuda.setSize(600, 480);
 		ayuda.setAlwaysOnTop(true);
 		
-		/* Creamos un JDialog que será la búsqueda y saldrá cuando pulsemos en su menú. */
-		buscar.pack();
-		buscar.setLocationRelativeTo(this);
-		buscar.setVisible(false);
-		buscar.setSize(600, 480);	
-		buscar.setAlwaysOnTop(true);
-		
 		/* Creamos un JDialog que serán los filtros y saldrá cuando pulsemos en su menú. */
 		filtros.pack();
 		filtros.setLocationRelativeTo(this);
@@ -153,12 +145,6 @@ public class Main extends JFrame {
         menu.setBackground(new Color(255, 255, 255));
 		menu.setForeground(new Color(30, 144, 255));
         this.menuBar.add(menu);
-        
-        item = new JMenuItem("Búsqueda");
-        item.setBackground(new Color(255, 255, 255));
-        item.setForeground(new Color(30, 144, 255));
-        menu.add(item);
-        item.addActionListener(new MenuBuscarActionListener());
         
         item = new JMenuItem("Filtrados");
         item.setBackground(new Color(255, 255, 255));
@@ -195,15 +181,6 @@ public class Main extends JFrame {
 	private class MenuSalirActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			System.exit(0);
-		}
-	}
-	
-	private class MenuBuscarActionListener implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			if (buscar.isVisible())
-				buscar.setVisible(false);
-			else
-				buscar.setVisible(true);
 		}
 	}
 	

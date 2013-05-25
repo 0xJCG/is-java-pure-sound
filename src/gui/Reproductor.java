@@ -41,5 +41,7 @@ public class Reproductor extends JDialog {
 		lblLetra.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		lblLetra.setBackground(new Color(255, 255, 255));
 		getContentPane().add(lblLetra, BorderLayout.CENTER);
+		
+		this.setModal(true);
 	}
 }

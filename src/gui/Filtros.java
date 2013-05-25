@@ -59,6 +59,8 @@ public class Filtros extends JDialog {
 		btnFiltrar.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		btnFiltrar.setBackground(new Color(255, 255, 255));
 		getContentPane().add(btnFiltrar);
+		
+		this.setModal(true);
 	}
 	
 	private void pintarArbol(int pSeleccion) {
